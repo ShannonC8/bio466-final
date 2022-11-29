@@ -1,6 +1,5 @@
 # bio466-final
 replace the following lines in home.py and selfcompare.py, lines 5-11 with your own information:
-
 <div>
 db = pymysql.connect(host="localhost",  # your host 
 <div>
@@ -9,7 +8,9 @@ db = pymysql.connect(host="localhost",  # your host
                      passwd="password",     # password
                      <div>
                      db="database")   # name of the database
-<div>
+                     
+<div>:
+
 
 Also replace the following lines in selfcompare.py,  lines 42-44 with the path to where you placed the two files:
 <div>
