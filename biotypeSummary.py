@@ -9,6 +9,7 @@ db = pymysql.connect(host="localhost",  # your host
 
 # Create a Cursor object to execute queries.
 cur = db.cursor()
+cur2 = db.cursor()
 
 print('<html>')
 print('<head>')
@@ -31,12 +32,15 @@ print('<h1>Biotype Summary</h1>')
 print('<p>info</p>')
 executionStatement = "SELECT * FROM `BIOTYPE_SUMMARY`"
 cur.execute(executionStatement)
+executionStatement2 = "SELECT * FROM `AVERAGE_SUMMARY`"
+cur2.execute(executionStatement2)
 # print the first, second, and third columns to a table
 print ("<table border=1 cellspacing=0 cellpadding=3><tr><th>Source</th><th>Biotype</th><th>Occurencec 48th"
-       "</th><th>Occurance 55th</th></tr>")
-for row in cur.fetchall() :
+       "</th><th>Occurance 55th</th><th>Average 48th</th><th>Average 55th</th></tr>")
+for row, row2 in zip(cur.fetchall(), cur2.fetchall()) :
     print ("<tr><td>" + str(row[0]) + "</td><td>" + str(row[1]) + "</td><td>"  + str(row[2])
-           + "</td><td>" + str(row[3]) + "</td></tr>")
+           + "</td><td>" + str(row[3])  + "</td><td>" + str(row2[2])  + "</td><td>" + str(row2[3])
+           + "</td></tr>")
 print ("</table>")
 print('</section>')
 print('<section class="footer">')
