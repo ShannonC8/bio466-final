@@ -27,16 +27,16 @@ print('<p>Thinh Nguyen and Shannon Cheng</p>')
 print('</div>')
 print('</div>')
 print('<section class ="hero">')
-print('<h1>GENE_48th_selfcompare</h1>')
+print('<h1>Joining</h1>')
 print('<p>info</p>')
-executionStatement = "SELECT * FROM `GENE_48th_selfcompare`"
+executionStatement = "SELECT * FROM `JOINING_48th`"
 cur.execute(executionStatement)
 # print the first, second, and third columns to a table
-print ("<table border=1 cellspacing=0 cellpadding=3><tr><th>ena id</th><th>ena name</th><th>ena strand</th>"
-       "<th>frame id</th><th>frame name</th><th>frame strand</th></tr>")
+print ("<table border=1 cellspacing=0 cellpadding=3><tr><th>Source</th><th>Biotype</th><th>Occurencec 48th"
+       "</th><th>Occurance 55th</th></tr>")
 for row in cur.fetchall() :
-    print ("<tr><td>" + str(row[0]) + "</td><td>" + str(row[1]) + "</td><td>"  + str(row[2]) + "</td><td>"
-           + str(row[3]) + "</td><td>" + str(row[4]) + "</td><td>"  + str(row[5]) + "</td></tr>")
+    print ("<tr><td>" + str(row[0]) + "</td><td>" + str(row[1]) + "</td><td>"  + str(row[2])
+           + "</td><td>" + str(row[3]) + "</td></tr>")
 print ("</table>")
 print('</section>')
 print('<section class="footer">')
