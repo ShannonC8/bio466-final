@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 print("Content-type:text/html\r\n\r\n")
 import cgi, cgitb, pymysql
+
 cgitb.enable()
 db = pymysql.connect(host="localhost",  # your host
                      user="chengs12",       # username
@@ -27,16 +28,32 @@ print('<p>Thinh Nguyen and Shannon Cheng</p>')
 print('</div>')
 print('</div>')
 print('<section class ="hero">')
-print('<h1>GENE_48th_selfcompare</h1>')
+print('<h1>Gene Summary</h1>')
 print('<p>info</p>')
-executionStatement = "SELECT * FROM `GENE_48th_selfcompare`"
+print('<table><tr><th>')
+executionStatement = "SELECT * FROM `UNIQUE_GENE_48th`"
+print('<h1>Unique genes from 48th version</h1>')
 cur.execute(executionStatement)
 # print the first, second, and third columns to a table
-print ("<table border=1 cellspacing=0 cellpadding=3><tr><th>ena id</th><th>ena name</th><th>ena strand</th>"
-       "<th>frame id</th><th>frame name</th><th>frame strand</th></tr>")
+print ("<table border=1 cellspacing=0 cellpadding=3><tr><th>ID</th><th>source"
+       "</th><th>name</th><th>start point</th><th>end point</th><th>length</th><th>biotype</th></tr>")
 for row in cur.fetchall() :
-    print ("<tr><td>" + str(row[0]) + "</td><td>" + str(row[1]) + "</td><td>"  + str(row[2]) + "</td><td>"
-           + str(row[3]) + "</td><td>" + str(row[4]) + "</td><td>"  + str(row[5]) + "</td></tr>")
+    print ("<tr><td>" + str(row[0]) + "</td><td>" + str(row[1]) + "</td><td>"  + str(row[2])
+            +"</td><td>" + str(row[3]) + "</td><td>" + str(row[4]) + "</td><td>"  + str(row[5])
+           + "</td><td>" + str(row[6]) + "</td></tr>")
+print('</th><th>')
+print ("</table>")
+print('<h1>Unique genes from 55th version</h1>')
+executionStatement = "SELECT * FROM `UNIQUE_GENE_55th`"
+cur.execute(executionStatement)
+# print the first, second, and third columns to a table
+print ("<table border=1 cellspacing=0 cellpadding=3><tr><th>ID</th><th>source"
+       "</th><th>name</th><th>start point</th><th>end point</th><th>length</th><th>biotype</th></tr>")
+for row in cur.fetchall() :
+    print ("<tr><td>" + str(row[0]) + "</td><td>" + str(row[1]) + "</td><td>"  + str(row[2])
+           + "</td><td>" + str(row[3]) + "</td><td>" + str(row[4]) + "</td><td>" + str(row[5])
+           + "</td><td>" + str(row[6]) + "</td></tr>")
+print('</th></tr></table>')
 print ("</table>")
 print('</section>')
 print('<section class="footer">')
@@ -58,5 +75,4 @@ del cur
 db.close()
 print('</body>')
 print('</html>')
-
 
