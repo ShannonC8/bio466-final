@@ -27,9 +27,9 @@ print('<p>Thinh Nguyen and Shannon Cheng</p>')
 print('</div>')
 print('</div>')
 print('<section class ="hero">')
-print('<h1>Joining</h1>')
+print('<h1>Biotype Summary</h1>')
 print('<p>info</p>')
-executionStatement = "SELECT * FROM `JOINING_48th`"
+executionStatement = "SELECT * FROM `BIOTYPE_SUMMARY`"
 cur.execute(executionStatement)
 # print the first, second, and third columns to a table
 print ("<table border=1 cellspacing=0 cellpadding=3><tr><th>Source</th><th>Biotype</th><th>Occurencec 48th"
@@ -45,7 +45,9 @@ print("<a href='http://bio466-f15.csi.miamioh.edu/~chengs12/home.py'>Home</a>")
 print("</th><th>")
 print("<a href='http://bio466-f15.csi.miamioh.edu/~chengs12/selfcompare.py'>GENE 48th selfcompare</a>")
 print("</th><th>")
-print("<a href='http://bio466-f15.csi.miamioh.edu/~chengs12/Joining.py'>Joining</a>")
+print("<a href='http://bio466-f15.csi.miamioh.edu/~chengs12/biotypeSummary.py'>Biotype Summary</a>")
+print("</th><th>")
+print("<a href='http://bio466-f15.csi.miamioh.edu/~chengs12/geneSummary.py'>Gene Summary</a>")
 print("</th></tr></table>")
 print('</section>')
 print('<br>')
