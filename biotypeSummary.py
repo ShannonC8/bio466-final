@@ -1,15 +1,10 @@
 #!/usr/bin/env python3
 print("Content-type:text/html\r\n\r\n")
+from constants import constant
 import cgi, cgitb, pymysql
 cgitb.enable()
-db = pymysql.connect(host="localhost",  # your host
-                     user="chengs12",       # username
-                     passwd="bio466",     # password
-                     db="chengs12")   # name of the database
-
-# Create a Cursor object to execute queries.
-cur = db.cursor()
-cur2 = db.cursor()
+cur = constant.getCursor()
+cur2 = constant.getCursor()
 
 print('<html>')
 print('<head>')
@@ -44,22 +39,10 @@ for row, row2 in zip(cur.fetchall(), cur2.fetchall()) :
 print ("</table>")
 print('</section>')
 print('<section class="footer">')
-print("<table style=\"border-spacing: 20px 0;\"><tr><th>")
-print("<a href='http://bio466-f15.csi.miamioh.edu/~chengs12/home.py'>Home</a>")
-print("</th><th>")
-print("<a href='http://bio466-f15.csi.miamioh.edu/~chengs12/selfcompare.py'>GENE 48th selfcompare</a>")
-print("</th><th>")
-print("<a href='http://bio466-f15.csi.miamioh.edu/~chengs12/biotypeSummary.py'>Biotype Summary</a>")
-print("</th><th>")
-print("<a href='http://bio466-f15.csi.miamioh.edu/~chengs12/testSummary.py'>Gene Summary</a>")
-print("</th><th>")
-print("<a href='http://bio466-f15.csi.miamioh.edu/~chengs12/hello_get.py'>Unique annotated genes</a>")
-print("</th></tr></table>")
+constant.printFooter()
 print('</section>')
 print('<br>')
-cur.close()
-del cur
-db.close()
+constant.closeCursor()
 print('</body>')
 print('</html>')
 

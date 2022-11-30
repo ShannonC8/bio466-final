@@ -1,15 +1,9 @@
 #!/usr/bin/env python3
 print("Content-type:text/html\r\n\r\n")
+from constants import constant
 import cgi, cgitb, pymysql
-
 cgitb.enable()
-db = pymysql.connect(host="localhost",  # your host
-                     user="chengs12",       # username
-                     passwd="bio466",     # password
-                     db="chengs12")   # name of the database
-
-# Create a Cursor object to execute queries.
-cur = db.cursor()
+cur = constant.getCursor()
 
 print('<html>')
 print('<head>')
@@ -39,24 +33,35 @@ for row in cur.fetchall() :
     print ("<tr><td>" + str(row[0]) + "</td><td>" + str(row[1]) + "</td><td>"  + str(row[2])
             + "</td></tr>")
 print ("</table>")
+
+print('<h1>Overall Gene Summary</h1>')
+executionStatement = "SELECT * FROM `OVERALL_GENE_SUMMARY`"
+cur.execute(executionStatement)
+# print the first, second, and third columns to a table
+print ("<table border=1 cellspacing=0 cellpadding=3><tr><th>source</th><th>unique gene 48th</th>"
+       "<th>unique gene 55th</th><th>common gene</th></tr>")
+for row in cur.fetchall() :
+    print ("<tr><td>" + str(row[0]) + "</td><td>" + str(row[1]) + "</td><td>"  + str(row[2])
+            + "</td><td>"  + str(row[3]) + "</td></tr>")
+print ("</table>")
+
+print('<h1>Overall Transcript Summary</h1>')
+executionStatement = "SELECT * FROM `OVERALL_TRANSCRIPT_SUMMARY`"
+cur.execute(executionStatement)
+# print the first, second, and third columns to a table
+print ("<table border=1 cellspacing=0 cellpadding=3><tr><th>source</th><th>unique gene 48th</th>"
+       "<th>unique gene 55th</th><th>common gene</th></tr>")
+for row in cur.fetchall() :
+    print ("<tr><td>" + str(row[0]) + "</td><td>" + str(row[1]) + "</td><td>"  + str(row[2])
+            + "</td><td>"  + str(row[3]) + "</td></tr>")
+print ("</table>")
+
 print('</section>')
 print('<section class="footer">')
-print("<table style=\"border-spacing: 20px 0;\"><tr><th>")
-print("<a href='http://bio466-f15.csi.miamioh.edu/~chengs12/home.py'>Home</a>")
-print("</th><th>")
-print("<a href='http://bio466-f15.csi.miamioh.edu/~chengs12/selfcompare.py'>GENE 48th selfcompare</a>")
-print("</th><th>")
-print("<a href='http://bio466-f15.csi.miamioh.edu/~chengs12/biotypeSummary.py'>Biotype Summary</a>")
-print("</th><th>")
-print("<a href='http://bio466-f15.csi.miamioh.edu/~chengs12/testSummary.py'>Gene Summary</a>")
-print("</th><th>")
-print("<a href='http://bio466-f15.csi.miamioh.edu/~chengs12/hello_get.py'>Unique annotated genes</a>")
-print("</th></tr></table>")
+constant.printFooter()
 print('</section>')
 print('<br>')
-cur.close()
-del cur
-db.close()
+constant.closeCursor()
 print('</body>')
 print('</html>')
 
