@@ -1,0 +1,164 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap");
+/*properties*/
+:root {
+  --juniper-color:#2db575;
+}
+
+/*selector which is name of html element or class*/
+body {
+  background: #f2f2f2;
+  /* Margin is used in an element to create distance between that element and other elements of page*/
+  margin: 0;
+  font-family: 'Poppins';
+}
+
+/*when refering to calss use.name*/
+.navbar {
+  background: white;
+  /*used to create distance between content and border of an element*/
+  padding: 1em;
+  /*nesting stuff*/
+}
+
+.navbar nav {
+  display: none;
+}
+
+.navbar .container {
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  vertical-align: top;
+}
+
+.navbar .container display:inline-block
+.logo {
+  text-align: left;
+  text-decoration: none;
+  font-weight: bold;
+  color: black;
+  font-size: 1.2em;
+}
+
+.navbar .container display:inline-block
+.logo span {
+  text-align: left;
+  color: var(--juniper-color);
+}
+
+.navbar .container .primary-nav {
+  float: right;
+  padding-right: 10em;
+}
+
+.navbar .container .secondary-nav {
+  background: var(--juniper-color);
+  text-decoration: none;
+  right: 2%;
+  top: 1%;
+  text-align: center;
+  padding: .6em;
+  margin-left: -0.25em;
+  font-size: 0.8em;
+  border-radius: 5em;
+  position: absolute;
+}
+
+a {
+  color: #444444;
+  text-decoration: none;
+}
+
+ul {
+  list-style-type: none;
+  /*no bullet*/
+  margin: 0;
+  padding: 0;
+}
+
+ul li {
+  text-decoration: none;
+  display: inline;
+  padding-left: 2em;
+}
+
+section {
+  padding: 5em 2em;
+  /*top&bottem, right&left */
+  /*top, right, bottom, left*/
+  float: left;
+}
+
+.hero .left-col {
+  text-align: left;
+  margin-left: 25em;
+  float: left;
+}
+
+.hero .left-col .watch-video-cta {
+  padding-left: 2em;
+}
+
+.hero .left-col .watch-video-cta .Youtube span {
+  font-weight: lighter;
+  padding-left: 1em;
+}
+
+.hero .left-col .subhead {
+  text-transform: uppercase;
+  font-weight: bold;
+  color: gray;
+  letter-spacing: .3em;
+}
+
+.hero .left-col h1 {
+  font-size: 2.5em;
+  line-height: 1.3em;
+  margin-top: .2em;
+}
+
+.hero .left-col .primary-cta {
+  background: var(--juniper-color);
+  color: white;
+  text-decoration: none;
+  padding: .6em 1.3em;
+  font-size: 1.4em;
+  border-radius: 5em;
+  /*rounded*/
+}
+
+.hero .robot-photo {
+  text-align: right;
+  /*margin-top: 6em;*/
+  float: right;
+}
+
+.footer {
+  width: 100%;
+  background: white;
+  padding: 1em;
+  font-family: 'Poppins';
+}
+
+.footer .important-links {
+  left: 30%;
+  vertical-align: baseline;
+  /*bottom: 10%; */
+}
+
+.footer .get-in-touch {
+  vertical-align: baseline;
+  position: absolute;
+  left: 70%;
+  /*bottom: 10%; */
+}
+
+.middle {
+  width: 100%;
+  background: var(--juniper-color);
+}
+
+.middle ul {
+  padding: 1em;
+}
+/*# sourceMappingURL=main.css.map */
