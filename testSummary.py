@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 print("Content-type:text/html\r\n\r\n")
 import cgi, cgitb, pymysql
+
 cgitb.enable()
 db = pymysql.connect(host="localhost",  # your host
                      user="chengs12",       # username
@@ -29,7 +30,7 @@ print('</div>')
 print('<section class ="hero">')
 print('<h1>Gene Summary</h1>')
 print('<p>info</p>')
-executionStatement = "SELECT * FROM `BIOTYPE_SUMMARY`"
+executionStatement = "SELECT * FROM `GENE_SUMMARY`"
 cur.execute(executionStatement)
 # print the first, second, and third columns to a table
 print ("<table border=1 cellspacing=0 cellpadding=3><tr><th>gene occurance</th><th>Occurencec 48th"
@@ -47,7 +48,7 @@ print("<a href='http://bio466-f15.csi.miamioh.edu/~chengs12/selfcompare.py'>GENE
 print("</th><th>")
 print("<a href='http://bio466-f15.csi.miamioh.edu/~chengs12/biotypeSummary.py'>Biotype Summary</a>")
 print("</th><th>")
-print("<a href='http://bio466-f15.csi.miamioh.edu/~chengs12/geneSummary.py'>Gene Summary</a>")
+print("<a href='http://bio466-f15.csi.miamioh.edu/~chengs12/testSummary.py'>Gene Summary</a>")
 print("</th></tr></table>")
 print('</section>')
 print('<br>')
@@ -56,3 +57,6 @@ del cur
 db.close()
 print('</body>')
 print('</html>')
+
+
+

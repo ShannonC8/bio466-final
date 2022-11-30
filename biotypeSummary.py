@@ -47,7 +47,7 @@ print("<a href='http://bio466-f15.csi.miamioh.edu/~chengs12/selfcompare.py'>GENE
 print("</th><th>")
 print("<a href='http://bio466-f15.csi.miamioh.edu/~chengs12/biotypeSummary.py'>Biotype Summary</a>")
 print("</th><th>")
-print("<a href='http://bio466-f15.csi.miamioh.edu/~chengs12/geneSummary.py'>Gene Summary</a>")
+print("<a href='http://bio466-f15.csi.miamioh.edu/~chengs12/testSummary.py'>Gene Summary</a>")
 print("</th></tr></table>")
 print('</section>')
 print('<br>')
