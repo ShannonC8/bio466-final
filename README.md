@@ -1,4 +1,4 @@
 # bio466-final
-replace lines 53-58 constants.py with your own information:
+replace lines 56-61 constants.py with your own information:
 
                      
