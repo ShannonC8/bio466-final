@@ -45,8 +45,6 @@ for row in cur.fetchall() :
 print ("</table>")
 
 print('<h1>Different and common transcripts among two releases and two sources</h1>')
-print('There are some issues risen when we compared the number of difference and common genes or transcripts. '
-      'The issues can come from the information in the gtf files, or the SQL quesries conditions.')
 executionStatement = "SELECT * FROM `OVERALL_TRANSCRIPT_SUMMARY`"
 cur.execute(executionStatement)
 # print the first, second, and third columns to a table
@@ -56,6 +54,8 @@ for row in cur.fetchall() :
     print ("<tr><td>" + str(row[0]) + "</td><td>" + str(row[1]) + "</td><td>"  + str(row[2])
             + "</td><td>"  + str(row[3]) + "</td></tr>")
 print ("</table>")
+print('There are some issues risen when we compared the number of difference and common genes or transcripts. '
+      'The issues can come from the information in the gtf files, or the SQL quesries conditions.')
 
 print('</section>')
 print('<section class="footer">')

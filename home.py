@@ -80,15 +80,27 @@ if(searchterm != None):
         cur.execute(executionStatement)
         theCur = cur.fetchall()
         if (len(theCur) > 0):
-            print("<table border=1 cellspacing=0 cellpadding=3  bgcolor=\"white\"><tr>"
-                    "<th>GeneId</th><th>Source</th>"
-                    "<th>Start</th><th>End</th><th>Length</th><th>Strand</th><th>Gene Name"
-                    "</th><th>Biotype</th></tr>")
-            for row in theCur:
-                print("<tr><td>" + str(row[0]) + "</td><td>" + str(row[1]) + "</td><td>" + str(row[2])
-                        + "</td><td>" + str(row[3]) + "</td><td>" + str(row[4]) + "</td><td>" + str(row[5])
-                        + "</td><td>" + str(row[6]) + "</td><td>" + str(row[7]) + "</td></tr>")
-            print("</table>")
+            if ('TRANSCRIPT' in tableName):
+                print("<table border=1 cellspacing=0 cellpadding=3  bgcolor=\"white\">"
+                      "<tr><th>Transcript Id</th><th>GeneId</th>"
+                      "<th>GeneId</th><th>Gene name</th><th>Start</th><th>End</th>"
+                      "<th>Length</th><th>Strand</th><th>Transcript Name</th><th>Biotype</th><th>Exo numbers</th></tr>")
+                for row in theCur:
+                    print("<tr><td>" + str(row[0]) + "</td><td>" + str(row[1]) + "</td><td>" + str(row[2])
+                          + "</td><td>" + str(row[3]) + "</td><td>" + str(row[4]) + "</td><td>" + str(row[5])
+                          + "</td><td>" + str(row[6]) + "</td><td>" + str(row[7]) + "</td><td>" + str(row[8])
+                          + "</td><td>" + str(row[9]) + "</td><td>" + str(row[10]) + "</td></tr>")
+                print("</table>")
+            else:
+                print("<table border=1 cellspacing=0 cellpadding=3  bgcolor=\"white\"><tr>"
+                        "<th>GeneId</th><th>Source</th>"
+                        "<th>Start</th><th>End</th><th>Length</th><th>Strand</th><th>Gene Name"
+                        "</th><th>Biotype</th></tr>")
+                for row in theCur:
+                    print("<tr><td>" + str(row[0]) + "</td><td>" + str(row[1]) + "</td><td>" + str(row[2])
+                            + "</td><td>" + str(row[3]) + "</td><td>" + str(row[4]) + "</td><td>" + str(row[5])
+                            + "</td><td>" + str(row[6]) + "</td><td>" + str(row[7]) + "</td></tr>")
+                print("</table>")
         else:#if no matches, prints not found
             print("not found")
         print("<br>")
