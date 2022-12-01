@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 from constants import constant
-print("Content-type:text/html\r\n\r\n")
 import cgi, cgitb, pymysql
+
 cgitb.enable()
 
 #use the cursor o
 cur = constant.getCursor()
-
+print("Content-type:text/html\r\n\r\n")
 print('<html>')
 print('<head>')
 print('<!--attributes inside of tags ex)charset-->')
@@ -55,13 +55,13 @@ print('<table><tr><td>')
 print('<h1>Searching Gene</h1>')
 print('<div style="float:left">')
 print('<form>')
-print('<label for="type">Choose a type:</label>')
+"""print('<label for="type">Choose a type:</label>')
 print('<select name="type" id="type">')
 print('<option value="Transcript">Transcript</option>')
 print('<option value="Gene">Gene</option>')
-print('</select>')
+print('</select>')"""
 print('<br>')
-print('<label for="geneId">Gene Id/Transcript Id or Gene name:</label>')
+print('<label for="geneId">Gene name:</label>')
 print('<input type="text" id="geneId" name="geneId"><br><br>') #input for gene name
 print('<input type="submit" value="Go">')
 print('</form>')
@@ -69,109 +69,34 @@ print('</div>')
 print('</td><td>')
 form = cgi.FieldStorage()#gets the form
 searchterm =  form.getvalue('geneId')#gets the gene id/name input
-type =  form.getvalue('type')#gets whether it is trasncript or gene
-geneTables = ['GENE_48th', 'GENE_55th'] #the gene tables
-transcriptTables = ['TRANSCRIPT_48th', 'TRANSCRIPT_55th'] #the transcript tables
-#if user selected gene
-if(type == 'Gene'):
-    #prints the type and the id/name
-    print("The ", type, " tables for", searchterm, ":")
-    print("<table>")
-    for tableName in geneTables: #for each gene version
-        print("<tr><th>")
-        #looks in the id
-        executionStatement = "SELECT * FROM `" + tableName + "` WHERE gene_id = '" + searchterm + "'"
+#type =  form.getvalue('type')#gets whether it is trasncript or gene
+#the names of all the tables
+tablesName = ['GENE_48th', 'GENE_55th', 'TRANSCRIPT_48th', 'TRANSCRIPT_55th']
+
+if(searchterm != None):
+    for tableName in tablesName:
+        print('The table for ' + tableName.replace('_',' '))
+        executionStatement = "SELECT * FROM `" + tableName + "` WHERE gene_name = '" + searchterm + "'"
         cur.execute(executionStatement)
         theCur = cur.fetchall()
-        print(tableName.replace('GENE_',''), 'Version' )
-        if(len(theCur) > 0):
-            print("<table border=1 cellspacing=0 cellpadding=3  bgcolor=\"white\"><tr>"
-                   "<th>GeneId</th><th>Source</th>"
-                   "<th>Start</th><th>End</th><th>Length</th><th>Strand</th><th>Gene Name"
-                   "</th><th>Biotype</th></tr>")
-            for row in theCur:
-                print("<tr><td>" + str(row[0]) + "</td><td>" + str(row[1]) + "</td><td>" + str(row[2])
-                          + "</td><td>" + str(row[3]) + "</td><td>" + str(row[4]) + "</td><td>" + str(row[5])
-                          + "</td><td>" + str(row[6]) + "</td><td>" + str(row[7]) + "</td></tr>")
-            print("</table>")
-        else:#if the id has no matches, looks in the names
-            executionStatement = "SELECT * FROM `" + tableName + "` WHERE gene_name = '" + searchterm + "'"
-            cur.execute(executionStatement)
-            theCur = cur.fetchall()
-            if (len(theCur) > 0):
-                print("<table border=1 cellspacing=0 cellpadding=3  bgcolor=\"white\"><tr>"
-                      "<th>GeneId</th><th>Source</th>"
-                      "<th>Start</th><th>End</th><th>Length</th><th>Strand</th><th>Gene Name"
-                      "</th><th>Biotype</th></tr>")
-                for row in theCur:
-                    print("<tr><td>" + str(row[0]) + "</td><td>" + str(row[1]) + "</td><td>" + str(row[2])
-                          + "</td><td>" + str(row[3]) + "</td><td>" + str(row[4]) + "</td><td>" + str(row[5])
-                          + "</td><td>" + str(row[6]) + "</td><td>" + str(row[7]) + "</td></tr>")
-                print("</table>")
-            else:#if no matches, prints not found
-                print("not found")
-    print("</table>")
-if(type == 'Transcript'):
-    print("The ", type, " tables for", searchterm, ":")
-    print("<table>")
-    for tableName in transcriptTables:#for each release of tranciprt
-        print("<tr><th>")
-        #searches geneid column
-        executionStatement = "SELECT * FROM `" + tableName+"` WHERE gene_id = '" + searchterm + "'"
-        cur.execute(executionStatement)
-        theCur = cur.fetchall()
-        print(tableName.replace('TRANSCRIPT_', ''), 'Version')
         if (len(theCur) > 0):
-            print("<table border=1 cellspacing=0 cellpadding=3  bgcolor=\"white\">"
-                  "<tr><th>Transcript Id</th><th>GeneId</th>"
-                  "<th>GeneId</th><th>Gene name</th><th>Start</th><th>End</th>"
-                  "<th>Length</th><th>Strand</th><th>Transcript Name</th><th>Biotype</th><th>Exo numbers</th></tr>")
+            print("<table border=1 cellspacing=0 cellpadding=3  bgcolor=\"white\"><tr>"
+                    "<th>GeneId</th><th>Source</th>"
+                    "<th>Start</th><th>End</th><th>Length</th><th>Strand</th><th>Gene Name"
+                    "</th><th>Biotype</th></tr>")
             for row in theCur:
                 print("<tr><td>" + str(row[0]) + "</td><td>" + str(row[1]) + "</td><td>" + str(row[2])
-                      + "</td><td>" + str(row[3]) + "</td><td>" + str(row[4]) + "</td><td>" + str(row[5])
-                      + "</td><td>" + str(row[6]) + "</td><td>" + str(row[7]) + "</td><td>" + str(row[8])
-                      + "</td><td>" + str(row[9]) + "</td><td>" + str(row[10]) + "</td></tr>")
+                        + "</td><td>" + str(row[3]) + "</td><td>" + str(row[4]) + "</td><td>" + str(row[5])
+                        + "</td><td>" + str(row[6]) + "</td><td>" + str(row[7]) + "</td></tr>")
             print("</table>")
-        else: #if not found in gene id column, look in gene name
-            executionStatement = "SELECT * FROM `" + tableName + "` WHERE gene_name = '" + searchterm + "'"
-            cur.execute(executionStatement)
-            theCur = cur.fetchall()
-            if (len(theCur) > 0):
-                print("<table border=1 cellspacing=0 cellpadding=3  bgcolor=\"white\">"
-                      "<tr><th>Transcript Id</th><th>GeneId</th>"
-                      "<th>GeneId</th><th>Gene name</th><th>Start</th><th>End</th>"
-                      "<th>Length</th><th>Strand</th><th>Transcript Name</th><th>Biotype</th><th>Exo numbers</th></tr>")
-                for row in theCur:
-                    print("<tr><td>" + str(row[0]) + "</td><td>" + str(row[1]) + "</td><td>" + str(row[2])
-                          + "</td><td>" + str(row[3]) + "</td><td>" + str(row[4]) + "</td><td>" + str(row[5])
-                          + "</td><td>" + str(row[6]) + "</td><td>" + str(row[7]) + "</td><td>" + str(row[8])
-                          + "</td><td>" + str(row[9]) + "</td><td>" + str(row[10]) + "</td></tr>")
-                print("</table>")
-            else: #if not found in gene name look in trasncript id
-                executionStatement = "SELECT * FROM `" + tableName + "` WHERE transcript_id = '" + searchterm + "'"
-                cur.execute(executionStatement)
-                theCur = cur.fetchall()
-                if (len(theCur) > 0):
-                    print("<table border=1 cellspacing=0 cellpadding=3  bgcolor=\"white\">"
-                          "<tr><th>Transcript Id</th><th>GeneId</th>"
-                          "<th>GeneId</th><th>Gene name</th><th>Start</th><th>End</th>"
-                          "<th>Length</th><th>Strand</th><th>Transcript Name</th><th>Biotype</th><th>Exo numbers</th></tr>")
-                    for row in theCur:
-                        print("<tr><td>" + str(row[0]) + "</td><td>" + str(row[1]) + "</td><td>" + str(row[2])
-                              + "</td><td>" + str(row[3]) + "</td><td>" + str(row[4]) + "</td><td>" + str(row[5])
-                              + "</td><td>" + str(row[6]) + "</td><td>" + str(row[7]) + "</td><td>" + str(row[8])
-                              + "</td><td>" + str(row[9]) + "</td><td>" + str(row[10]) + "</td></tr>")
-                    print("</table>")
-                else: #prints not foun
-                    print("not found")
-        print("</tr></th>")
-    print("</table>")
+        else:#if no matches, prints not found
+            print("not found")
+        print("<br>")
+        #if user selected gene
 print("</td></tr>")
 print("</table>")
 print('</section>')
 print("<h1>Basic Gene Information</h1>")
-#the names of all the tables
-tablesName = ['GENE_48th', 'GENE_55th', 'TRANSCRIPT_48th', 'TRANSCRIPT_55th']
 #the names we want to print out
 tablesNames = ['GENE 48th version', 'GENE 55th version', 'TRANSCRIPT 48th version', 'TRANSCRIPT 55th version']
 for n, i in enumerate(tablesName):

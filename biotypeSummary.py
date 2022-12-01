@@ -23,8 +23,12 @@ print('<p>Thinh Nguyen and Shannon Cheng</p>')
 print('</div>')
 print('</div>')
 print('<section class ="hero">')
-print('<h1>Biotype Summary</h1>')
-print('<p>info</p>')
+print('<h1>Biotype occurrence and average length of genes in respect to biotype and database source</h1>')
+print('<p>The common values in rRNA and tRNA from the ena database source confirm the consistency '
+      'of sequencing and annotation in these non protein-coding genome locations. Slight differences in both protein'
+      '-coding and pseudogene biotypes promotes some promising analysis in other gene features.Rfam database '
+      'source provides more categories in the functional RNA in the release 48th, which will be studied only'
+      ' within the release 48th.</p>')
 executionStatement = "SELECT * FROM `BIOTYPE_SUMMARY`"
 cur.execute(executionStatement)
 executionStatement2 = "SELECT * FROM `AVERAGE_SUMMARY`"

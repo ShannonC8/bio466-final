@@ -23,8 +23,10 @@ print('<p>Thinh Nguyen and Shannon Cheng</p>')
 print('</div>')
 print('</div>')
 print('<section class ="hero">')
-print('<h1>GENE_48th_selfcompare</h1>')
-print('<p>info</p>')
+print('<h1>Overlapping genes between ena and Rfam sources</h1>')
+print('<p>All of the 34 overlapping genes are in tRNA and rRNA features; the findings '
+      'indicate the problem in the noise when we want to conduct the genome analysis. Thus, '
+      'it rises some QC issues in the consistency in genome annotation procedure.</p>')
 executionStatement = "SELECT * FROM `GENE_48th_selfcompare`"
 cur.execute(executionStatement)
 # print the first, second, and third columns to a table

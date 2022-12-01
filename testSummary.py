@@ -22,8 +22,7 @@ print('<p>Thinh Nguyen and Shannon Cheng</p>')
 print('</div>')
 print('</div>')
 print('<section class ="hero">')
-print('<h1>Gene Summary</h1>')
-print('<p>info</p>')
+print('<h1>Total number of annotated genes and transcript.</h1>')
 executionStatement = "SELECT * FROM `GENE_SUMMARY`"
 cur.execute(executionStatement)
 # print the first, second, and third columns to a table
@@ -34,7 +33,7 @@ for row in cur.fetchall() :
             + "</td></tr>")
 print ("</table>")
 
-print('<h1>Overall Gene Summary</h1>')
+print('<h1>Different and common genes among two releases and two sources</h1>')
 executionStatement = "SELECT * FROM `OVERALL_GENE_SUMMARY`"
 cur.execute(executionStatement)
 # print the first, second, and third columns to a table
@@ -45,7 +44,9 @@ for row in cur.fetchall() :
             + "</td><td>"  + str(row[3]) + "</td></tr>")
 print ("</table>")
 
-print('<h1>Overall Transcript Summary</h1>')
+print('<h1>Different and common transcripts among two releases and two sources</h1>')
+print('There are some issues risen when we compared the number of difference and common genes or transcripts. '
+      'The issues can come from the information in the gtf files, or the SQL quesries conditions.')
 executionStatement = "SELECT * FROM `OVERALL_TRANSCRIPT_SUMMARY`"
 cur.execute(executionStatement)
 # print the first, second, and third columns to a table
