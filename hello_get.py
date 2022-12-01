@@ -3,12 +3,6 @@ print("Content-type:text/html\r\n\r\n")
 from constants import constant
 import cgi, cgitb, pymysql
 cgitb.enable()
-"""constants = constants.constants('http://bio466-f15.csi.miamioh.edu/~chengs12/home.py',
-                      'http://bio466-f15.csi.miamioh.edu/~chengs12/selfcompare.py',
-                      'http://bio466-f15.csi.miamioh.edu/~chengs12/biotypeSummary.py',
-                      'http://bio466-f15.csi.miamioh.edu/~chengs12/testSummary.py',
-                      'http://bio466-f15.csi.miamioh.edu/~chengs12/hello_get.py',
-                      'localhost', 'chengs12', 'bio466', 'chengs12')"""
 cur = constant.getCursor()
 
 print('<html>')
@@ -35,7 +29,7 @@ print('<p>The below tables show the unique genes for each release, with the firs
 executionStatement = "SELECT * FROM `OVERALL_GENE_SUMMARY`"
 print('<h1>Overview of the differences</h1>')
 cur.execute(executionStatement)
-# print the first, second, and third columns to a table
+# print the desired columns
 print ("<table border=1 cellspacing=0 cellpadding=3><tr><th>source</th><th>genes unique to 48th release"
        "</th><th>genes unique to 55th release</th><th>common genes</th></tr>")
 for row in cur.fetchall() :

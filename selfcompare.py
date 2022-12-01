@@ -4,13 +4,6 @@ print("Content-type:text/html\r\n\r\n")
 import cgi, cgitb, pymysql
 from constants import constant
 cgitb.enable()
-
-"""constants = constants.constants('http://bio466-f15.csi.miamioh.edu/~chengs12/home.py',
-                      'http://bio466-f15.csi.miamioh.edu/~chengs12/selfcompare.py',
-                      'http://bio466-f15.csi.miamioh.edu/~chengs12/biotypeSummary.py',
-                      'http://bio466-f15.csi.miamioh.edu/~chengs12/testSummary.py',
-                      'http://bio466-f15.csi.miamioh.edu/~chengs12/hello_get.py',
-                      'localhost', 'chengs12', 'bio466', 'chengs12')"""
 cur = constant.getCursor()
 
 print('<html>')
