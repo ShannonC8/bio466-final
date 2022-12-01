@@ -18,6 +18,7 @@ print('<div class = "navbar">')
 print('<!--short cut is period with class name and shift  -->')
 print('<div class="container">')
 print('<p>Thinh Nguyen and Shannon Cheng</p>')
+constant.printFooter()
 print('</div>')
 print('</div>')
 print('<section class ="hero">')
@@ -36,6 +37,49 @@ for row in cur.fetchall() :
     print ("<tr><td>" + str(row[0]) + "</td><td>" + str(row[1]) + "</td><td>"  + str(row[2])
             + "</td><td>"  + str(row[3]) + "</td><td>" + str(row[4]) + "</td></tr>")
 print ("</table>")
+
+print('<h1>Searching Gene</h1>')
+print('<div style="float:left">')
+print('<form>')
+print('<br>')
+print('<label for="geneId">Gene name/Id:</label>')
+print('<input type="text" id="geneId" name="geneId"><br><br>') #input for gene name
+print('<input type="submit" value="Go">')
+print('</form>')
+form = cgi.FieldStorage()#gets the form
+searchterm =  form.getvalue('geneId')#gets the gene id/name input
+tablesName = ['UNIQUE_GENE_48th','UNIQUE_GENE_55th']
+l = []
+b = []
+if(searchterm != None):
+    printIt = False
+    inIt = 0
+    for tableName in tablesName:  # check gene name first
+        executionStatement = "SELECT * FROM `" + tableName + "` WHERE name = '" + searchterm + "'"
+        cur.execute(executionStatement)
+        theCur = cur.fetchall()
+        if (len(theCur) > 0):  # if it is found
+            for row in theCur:
+                b.append(str(row[6]))
+            printIt = True
+            inIt = tableName.replace('UNIQUE_GENE_', '')
+            l.append(inIt)
+        executionStatement = "SELECT * FROM `" + tableName + "` WHERE ID = '" + searchterm + "'"
+        cur.execute(executionStatement)
+        theCur = cur.fetchall()
+        if (len(theCur) > 0):  # if it is found
+            for row in theCur:
+                b.append(str(row[6]))
+            printIt = True
+            inIt = tableName.replace('UNIQUE_GENE_', '')
+            l.append(inIt)
+    if printIt:
+        if(len(l) > 1):
+            print("Gene ", searchterm, " is unique in biotype: ", b[0], " and ", b[1])
+        else:
+            print("Gene ", searchterm, " is a unique gene in the ", l[0], " release")
+    else:
+        print("Gene ", searchterm, " is not a unique gene")
 
 print('<table style="vertical-align: top;"><tr><th>')
 executionStatement = "SELECT * FROM `UNIQUE_GENE_48th`"

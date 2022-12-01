@@ -19,6 +19,7 @@ print('<div class = "navbar">')
 print('<!--short cut is period with class name and shift  -->')
 print('<div class="container">')
 print('<p>Thinh Nguyen and Shannon Cheng</p>')
+constant.printFooter()
 print('</div>')
 print('</div>')
 print('<section class ="hero">')
@@ -49,7 +50,7 @@ executionStatement = "SELECT * FROM `OVERALL_TRANSCRIPT_SUMMARY`"
 cur.execute(executionStatement)
 # print the first, second, and third columns to a table
 print ("<table border=1 cellspacing=0 cellpadding=3><tr><th>source</th><th>unique gene 48th</th>"
-       "<th>unique transcript 55th</th><th>common gene</th><th>different name</th></tr>")
+       "<th>unique transcript 55th</th><th>common transcript</th><th>different name</th></tr>")
 for row in cur.fetchall() :
     print ("<tr><td>" + str(row[0]) + "</td><td>" + str(row[1]) + "</td><td>"  + str(row[2])
             + "</td><td>"  + str(row[3]) + "</td><td>" + str(row[4]) + "</td></tr>")
