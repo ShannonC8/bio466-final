@@ -3,10 +3,8 @@ from constants import constant
 import cgi, cgitb, pymysql
 
 cgitb.enable()
-
 #use the cursor o
 cur = constant.getCursor()
-print("Content-type:text/html\r\n\r\n")
 print('<html>')
 print('<head>')
 print('<!--attributes inside of tags ex)charset-->')
@@ -74,71 +72,118 @@ searchterm =  form.getvalue('geneId')#gets the gene id/name input
 tablesName = ['GENE_48th', 'GENE_55th', 'TRANSCRIPT_48th', 'TRANSCRIPT_55th']
 
 geneDiff = []
+geneCol = ['Gene Id','Source', 'Start', 'End', 'Length', 'Strand',
+                 'Gene Name', 'Biotype']
 transcriptDiff = []
+transcriptCol = ['Transcript Id','Gene Id','Source', 'Gene name', 'Start', 'End', 'Length', 'Strand',
+                 'Transcript Name', 'Biotype', 'Exo numbers']
 if(searchterm != None):
-    for tableName in tablesName:
-        print('The table for ' + tableName.replace('_',' '))
+    for tableName in tablesName: #check gene name first
+        print('The table for ' + tableName.replace('_',' ') + ' ' +searchterm)
         executionStatement = "SELECT * FROM `" + tableName + "` WHERE gene_name = '" + searchterm + "'"
         cur.execute(executionStatement)
         theCur = cur.fetchall()
-        if (len(theCur) > 0):
-            if ('TRANSCRIPT' in tableName):
+        if (len(theCur) > 0): #if it is found
+            if ('TRANSCRIPT' in tableName):#if is trasncirpt turn
                 transcriptDiff
                 print("<table border=1 cellspacing=0 cellpadding=3  bgcolor=\"white\">"
                       "<tr><th>Transcript Id</th><th>GeneId</th>"
-                      "<th>Gene Id</th><th>Gene name</th><th>Start</th><th>End</th>"
+                      "<th>Source</th><th>Gene name</th><th>Start</th><th>End</th>"
                       "<th>Length</th><th>Strand</th><th>Transcript Name</th><th>Biotype</th><th>Exo numbers</th></tr>")
                 for row in theCur:
+                    transcriptDiff.append([str(row[0]),str(row[1]),str(row[2]), str(row[3]),
+                                           str(row[4]),str(row[5]), str(row[6]),str(row[7]),
+                                           str(row[8]), str(row[9]),str(row[10])])
                     print("<tr><td>" + str(row[0]) + "</td><td>" + str(row[1]) + "</td><td>" + str(row[2])
                           + "</td><td>" + str(row[3]) + "</td><td>" + str(row[4]) + "</td><td>" + str(row[5])
                           + "</td><td>" + str(row[6]) + "</td><td>" + str(row[7]) + "</td><td>" + str(row[8])
                           + "</td><td>" + str(row[9]) + "</td><td>" + str(row[10]) + "</td></tr>")
                 print("</table>")
-            else:
+            else: #if is gene turn
                 print("<table border=1 cellspacing=0 cellpadding=3  bgcolor=\"white\"><tr>"
                         "<th>GeneId</th><th>Source</th>"
                         "<th>Start</th><th>End</th><th>Length</th><th>Strand</th><th>Gene Name"
                         "</th><th>Biotype</th></tr>")
                 for row in theCur:
+                    geneDiff.append([str(row[0]), str(row[1]), str(row[2]), str(row[3]),
+                                           str(row[4]), str(row[5]), str(row[6]), str(row[7])])
                     print("<tr><td>" + str(row[0]) + "</td><td>" + str(row[1]) + "</td><td>" + str(row[2])
                             + "</td><td>" + str(row[3]) + "</td><td>" + str(row[4]) + "</td><td>" + str(row[5])
                             + "</td><td>" + str(row[6]) + "</td><td>" + str(row[7]) + "</td></tr>")
                 print("</table>")
-        else:#if no matches, prints not found
+        else:#if no matches, check id
             executionStatement = "SELECT * FROM `" + tableName + "` WHERE gene_id = '" + searchterm + "'"
             cur.execute(executionStatement)
             theCur = cur.fetchall()
-            if (len(theCur) > 0):
-                if ('TRANSCRIPT' in tableName):
-                    transcriptDiff
+            if (len(theCur) > 0):#if exist
+                if ('TRANSCRIPT' in tableName): #is transcirpt turn
+
                     print("<table border=1 cellspacing=0 cellpadding=3  bgcolor=\"white\">"
                           "<tr><th>Transcript Id</th><th>GeneId</th>"
-                          "<th>GeneId</th><th>Gene name</th><th>Start</th><th>End</th>"
+                          "<th>Source</th><th>Gene name</th><th>Start</th><th>End</th>"
                           "<th>Length</th><th>Strand</th><th>Transcript Name</th><th>Biotype</th><th>Exo numbers</th></tr>")
                     for row in theCur:
+                        transcriptDiff.append([str(row[0]), str(row[1]), str(row[2]), str(row[3]),
+                                           str(row[4]), str(row[5]), str(row[6]), str(row[7]),
+                                           str(row[8]), str(row[9]), str(row[10])])
                         print("<tr><td>" + str(row[0]) + "</td><td>" + str(row[1]) + "</td><td>" + str(row[2])
                               + "</td><td>" + str(row[3]) + "</td><td>" + str(row[4]) + "</td><td>" + str(row[5])
                               + "</td><td>" + str(row[6]) + "</td><td>" + str(row[7]) + "</td><td>" + str(row[8])
                               + "</td><td>" + str(row[9]) + "</td><td>" + str(row[10]) + "</td></tr>")
                     print("</table>")
-                else:
+                else: # row turn
+
                     print("<table border=1 cellspacing=0 cellpadding=3  bgcolor=\"white\"><tr>"
                           "<th>GeneId</th><th>Source</th>"
                           "<th>Start</th><th>End</th><th>Length</th><th>Strand</th><th>Gene Name"
                           "</th><th>Biotype</th></tr>")
                     for row in theCur:
+                        geneDiff.append([str(row[0]), str(row[1]), str(row[2]), str(row[3]),
+                                     str(row[4]), str(row[5]), str(row[6]), str(row[7])])
                         print("<tr><td>" + str(row[0]) + "</td><td>" + str(row[1]) + "</td><td>" + str(row[2])
                               + "</td><td>" + str(row[3]) + "</td><td>" + str(row[4]) + "</td><td>" + str(row[5])
                               + "</td><td>" + str(row[6]) + "</td><td>" + str(row[7]) + "</td></tr>")
                     print("</table>")
-            else:
+            else: #id or name not found
                 print("not found")
             print("<div>")
         print("<br>")
-        #if user selected gene
+    differences = []
+    if (len(transcriptDiff) > 1):
+        release_48th = transcriptDiff[0]
+        release_55th = transcriptDiff[1]
+        i = 0
+        for x, y in zip(release_48th, release_55th):
+            if (x != y):
+                differences.append(transcriptCol[i])
+            i += 1
+    if differences != []:
+        print('The differences in the transcripts are:')
+        for i in differences:
+            print('-', i)
+    else:
+        print('no differences in transcript')
+    print('<div>')
+    differences = []
+    if (len(geneDiff) > 1):
+        release_48th = geneDiff[0]
+        release_55th = geneDiff[1]
+        i = 0
+        for x, y in zip(release_48th, release_55th):
+            if (x != y):
+                differences.append(geneCol[i])
+            i += 1
+    if differences != []:
+        print('The differences in the genes are:')
+        for i in differences:
+            print('-', i)
+    else:
+        print('no differences in genes')
+
 print("</td></tr>")
 print("</table>")
 print('</section>')
+print('<section>')
 print("<h1>Basic Gene Information</h1>")
 #the names we want to print out
 tablesNames = ['GENE 48th version', 'GENE 55th version', 'TRANSCRIPT 48th version', 'TRANSCRIPT 55th version']
@@ -149,11 +194,14 @@ for n, i in enumerate(tablesName):
     num = 0
     for x in theCur:
         num += 1 #gets the size
-    print(tablesNames[n], " size: ", num) #prints the size
+    print('-',tablesNames[n], " size: ", num) #prints the size
     print("<br>")
 print('<div>')
-print('Each gene has one associated transcript')
+print('-For both releases each gene has exactly ONE associated transcript')
 print('<div>')
+print('-There are 11 categories of genes, see more in the "Gene Categories" tab')
+print('<div>')
+print('</section>')
 print('<section class="footer">')
 constant.printFooter()
 print('</section>')

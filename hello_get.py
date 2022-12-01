@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-print("Content-type:text/html\r\n\r\n")
 from constants import constant
 import cgi, cgitb, pymysql
 cgitb.enable()
@@ -26,19 +25,21 @@ print('<h1>Unique genes for each release</h1>')
 print('<p>The below tables show the unique genes for each release, with the first table showing'
       ' genes and transcripts annotated in the 48th release but not the 55th, and vise versa'
       ' for the second table</p>')
+
+print('<h2>Overview of the differences</h2>')
 executionStatement = "SELECT * FROM `OVERALL_GENE_SUMMARY`"
-print('<h1>Overview of the differences</h1>')
 cur.execute(executionStatement)
-# print the desired columns
-print ("<table border=1 cellspacing=0 cellpadding=3><tr><th>source</th><th>genes unique to 48th release"
-       "</th><th>genes unique to 55th release</th><th>common genes</th></tr>")
+# print the first, second, and third columns to a table
+print ("<table border=1 cellspacing=0 cellpadding=3><tr><th>source</th><th>unique gene 48th</th>"
+       "<th>unique gene 55th</th><th>common gene</th><th>different name</th></tr>")
 for row in cur.fetchall() :
     print ("<tr><td>" + str(row[0]) + "</td><td>" + str(row[1]) + "</td><td>"  + str(row[2])
-            +"</td><td>" + str(row[3]) + "</td></tr>")
+            + "</td><td>"  + str(row[3]) + "</td><td>" + str(row[4]) + "</td></tr>")
+print ("</table>")
 
 print('<table style="vertical-align: top;"><tr><th>')
 executionStatement = "SELECT * FROM `UNIQUE_GENE_48th`"
-print('<h1>Unique genes from 48th version</h1>')
+print('<h2>Unique genes from 48th version</h2>')
 cur.execute(executionStatement)
 # print the first, second, and third columns to a table
 print ("<table border=1 cellspacing=0 cellpadding=3><tr><th>ID</th><th>source"
@@ -50,7 +51,7 @@ for row in cur.fetchall() :
 print('</th><th>')
 print ("</table>")
 print('</th><th>')
-print('<h1>Unique genes from 55th version</h1>')
+print('<h2>Unique genes from 55th version</h2>')
 executionStatement = "SELECT * FROM `UNIQUE_GENE_55th`"
 cur.execute(executionStatement)
 # print the first, second, and third columns to a table

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-print("Content-type:text/html\r\n\r\n")
+
 from constants import constant
 import cgi, cgitb, pymysql
 cgitb.enable()
@@ -26,8 +26,8 @@ print('<h1>Total number of annotated genes and transcript.</h1>')
 executionStatement = "SELECT * FROM `GENE_SUMMARY`"
 cur.execute(executionStatement)
 # print the first, second, and third columns to a table
-print ("<table border=1 cellspacing=0 cellpadding=3><tr><th>source</th><th>Occurencec 48th"
-       "</th><th>Occurance 55th</th></tr>")
+print ("<table border=1 cellspacing=0 cellpadding=3><tr><th>source</th><th>Occurrence 48th"
+       "</th><th>Occurrence 55th</th></tr>")
 for row in cur.fetchall() :
     print ("<tr><td>" + str(row[0]) + "</td><td>" + str(row[1]) + "</td><td>"  + str(row[2])
             + "</td></tr>")
@@ -38,10 +38,10 @@ executionStatement = "SELECT * FROM `OVERALL_GENE_SUMMARY`"
 cur.execute(executionStatement)
 # print the first, second, and third columns to a table
 print ("<table border=1 cellspacing=0 cellpadding=3><tr><th>source</th><th>unique gene 48th</th>"
-       "<th>unique gene 55th</th><th>common gene</th></tr>")
+       "<th>unique gene 55th</th><th>common gene</th><th>different name</th></tr>")
 for row in cur.fetchall() :
     print ("<tr><td>" + str(row[0]) + "</td><td>" + str(row[1]) + "</td><td>"  + str(row[2])
-            + "</td><td>"  + str(row[3]) + "</td></tr>")
+            + "</td><td>"  + str(row[3]) + "</td><td>" + str(row[4]) + "</td></tr>")
 print ("</table>")
 
 print('<h1>Different and common transcripts among two releases and two sources</h1>')
@@ -49,10 +49,10 @@ executionStatement = "SELECT * FROM `OVERALL_TRANSCRIPT_SUMMARY`"
 cur.execute(executionStatement)
 # print the first, second, and third columns to a table
 print ("<table border=1 cellspacing=0 cellpadding=3><tr><th>source</th><th>unique gene 48th</th>"
-       "<th>unique gene 55th</th><th>common gene</th></tr>")
+       "<th>unique transcript 55th</th><th>common gene</th><th>different name</th></tr>")
 for row in cur.fetchall() :
     print ("<tr><td>" + str(row[0]) + "</td><td>" + str(row[1]) + "</td><td>"  + str(row[2])
-            + "</td><td>"  + str(row[3]) + "</td></tr>")
+            + "</td><td>"  + str(row[3]) + "</td><td>" + str(row[4]) + "</td></tr>")
 print ("</table>")
 print('There are some issues risen when we compared the number of difference and common genes or transcripts. '
       'The issues can come from the information in the gtf files, or the SQL quesries conditions.')

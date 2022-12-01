@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-print("Content-type:text/html\r\n\r\n")
 #from home import constants
 import cgi, cgitb, pymysql
 from constants import constant
