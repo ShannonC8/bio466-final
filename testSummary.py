@@ -26,7 +26,7 @@ print('<h1>Total number of annotated genes and transcript.</h1>')
 executionStatement = "SELECT * FROM `GENE_SUMMARY`"
 cur.execute(executionStatement)
 # print the first, second, and third columns to a table
-print ("<table border=1 cellspacing=0 cellpadding=3><tr><th>gene occurance</th><th>Occurencec 48th"
+print ("<table border=1 cellspacing=0 cellpadding=3><tr><th>source</th><th>Occurencec 48th"
        "</th><th>Occurance 55th</th></tr>")
 for row in cur.fetchall() :
     print ("<tr><td>" + str(row[0]) + "</td><td>" + str(row[1]) + "</td><td>"  + str(row[2])

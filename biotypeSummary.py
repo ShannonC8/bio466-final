@@ -33,6 +33,7 @@ executionStatement = "SELECT * FROM `BIOTYPE_SUMMARY`"
 cur.execute(executionStatement)
 executionStatement2 = "SELECT * FROM `AVERAGE_SUMMARY`"
 cur2.execute(executionStatement2)
+n = 0
 # print the first, second, and third columns to a table
 print ("<table border=1 cellspacing=0 cellpadding=3><tr><th>Source</th><th>Biotype</th><th>Occurencec 48th"
        "</th><th>Occurance 55th</th><th>Average 48th</th><th>Average 55th</th></tr>")
@@ -40,7 +41,9 @@ for row, row2 in zip(cur.fetchall(), cur2.fetchall()) :
     print ("<tr><td>" + str(row[0]) + "</td><td>" + str(row[1]) + "</td><td>"  + str(row[2])
            + "</td><td>" + str(row[3])  + "</td><td>" + str(row2[2])  + "</td><td>" + str(row2[3])
            + "</td></tr>")
+    n+=1
 print ("</table>")
+print('There are ' + str(n) + 'categories of genes')
 print('</section>')
 print('<section class="footer">')
 constant.printFooter()
